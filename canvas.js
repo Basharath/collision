@@ -27,10 +27,9 @@ function Particle(x, y, radius) {
   this.x = x;
   this.y = y;
   this.radius = radius;
-  this.mass = 1;
   this.velocity = {
-    x: (Math.random() - 0.5) * 10,
-    y: (Math.random() - 0.5) * 10,
+    x: (Math.random() - 0.5) * 2,
+    y: (Math.random() - 0.5) * 2,
   };
   this.color = colors[Math.floor(Math.random() * colors.length)];
 
@@ -58,14 +57,14 @@ function Particle(x, y, radius) {
         0
       ) {
         // console.log('collided');
-        const res = {
+        const velDiff = {
           x: this.velocity.x - nearParticle.velocity.x,
           y: this.velocity.y - nearParticle.velocity.y,
         };
 
         if (
-          res.x * (nearParticle.x - this.x) +
-            res.y * (nearParticle.y - this.y) >=
+          velDiff.x * (nearParticle.x - this.x) +
+            velDiff.y * (nearParticle.y - this.y) >=
           0
         ) {
           const { x, y } = this.velocity;
@@ -93,7 +92,7 @@ function Particle(x, y, radius) {
 let particles = [];
 function init() {
   particles = [];
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 150; i++) {
     const radius = Math.random() * 15 + 5;
     let x = Math.random() * (canvas.width - 2 * radius) + radius;
     let y = Math.random() * (canvas.height - 2 * radius) + radius;
